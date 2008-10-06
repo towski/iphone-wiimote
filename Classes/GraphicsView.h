@@ -7,14 +7,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class Object2D;
-@class Vector2D;
-
 @interface GraphicsView : UIView <UIAccelerometerDelegate>
 {
-    Object2D* ball;
     NSTimer* timer;
-    Vector2D* gravity;
     UIAccelerationValue accelX;
     UIAccelerationValue accelY;
     UIAccelerationValue accelXcal;

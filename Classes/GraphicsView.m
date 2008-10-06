@@ -6,9 +6,6 @@
 //
 
 #import "GraphicsView.h"
-#import "Point2D.h"
-#import "Vector2D.h"
-#import "Object2D.h"
 #include <sys/kernel.h>
 
 #define kAccelFilt 0.03
@@ -31,22 +28,17 @@
 
 	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(9.0 / 60)];
 	[[UIAccelerometer sharedAccelerometer] setDelegate:self];
-        
     return self;
 }
 
 - (void)drawRect:(CGRect)rect
 {
-	int millis = 1;// clock_get_uptime() * 1000000;
-	//clock_get_uptime();
 }
 
 
 - (void)dealloc
 {
-    // Free everything up
     [timer invalidate];
-    [ball dealloc];
 	[super dealloc];
 }
 
@@ -79,7 +71,6 @@
 	if(accelY > 0.1){
 		accelY = 0.1;
 	}
-//1440 900
 	int cartesian_x = accelX * 10 * 720;
 	int cartesian_y = accelY * 10 * 450;
 	if(cartesian_x > 1440){
@@ -92,7 +83,6 @@
 	int temp_y_pos = (cartesian_y - 450) * -1;
 		x_pos = temp_x_pos;
 		y_pos = temp_y_pos;
-	//NSLog(@"Opening connection");
 		NSString *urlString = [NSString stringWithFormat:@"https://10.1.10.122:5010/t/mouseevent?x1=%d&y1=%d", x_pos, y_pos];
 
 		NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]
@@ -104,20 +94,14 @@
 			NSLog(@"fail");
 		}
 
-	//NSLog(@"%f %f", accelX, accelY);
-    //[gravity setEndPointX:accelX*2 Y:accelY*2];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
 	[connection release];
-	//[receivedData release];
-	NSURL *failingURL = [[error userInfo] objectForKey:@"NSErrorFailingURLKey"];
-	//[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[failingURL host]];
 	NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription],[[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
-    //[receivedData setLength:0];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
@@ -125,9 +109,7 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
-	//NSLog(@"Succeeded!");// Received %d bytes of data",[receivedData length]);
     [connection release];
-    //[receivedData release];	
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{

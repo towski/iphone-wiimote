@@ -1,0 +1,1 @@
+this should compile in Xcode, and will run on the device. It searches for an IphoneRemote server (right now its just a hard coded ip), so youll have to add your own ip and compile. The file with the accelerometer/http connection code is GraphicsView.m. (i need to remove and rename the other files which aren’t used)
